@@ -1,26 +1,22 @@
-# Addepto - Operations Automation Agency Website
+# CKDIGITAL - Official Agency Website (Modernized & Humanized Edition)
 
-High-converting static landing page designed specifically for Nigerian and emerging-market SME operations automation.
-
-## 🚀 Key Features Built-In
-- **The 45-Minute Leak Audit Offer:** Low-friction, high-trust entry hook.
-- **Direct WhatsApp Lead Routing:** Form submissions automatically format and push into WhatsApp chats with pre-filled customer qualification.
-- **Humanized, Anti-Slop Copy:** Written using the GetPaid and Humanizer frameworks—no corporate fluff, zero tech jargon, focused purely on hours and Naira saved.
-- **Zero Build Step:** Native, lightweight, mobile-responsive HTML5, CSS3, and Vanilla JavaScript.
+A high-converting, humanized website for **CKDIGITAL**, Nigeria's premier web design and digital strategy agency established in 2011.
 
 ---
 
-## 🛠️ Configuration Before Deployment
-In `main.js`:
-```javascript
-var WHATSAPP_NUMBER = "234XXXXXXXXXX"; // Your WhatsApp number (country code + number, no '+' or spaces)
-var FALLBACK_EMAIL = "hello@youragency.com"; // Your fallback business email
-```
+## 🌟 What This Modernized Build Delivers
+- **13+ Years & 450+ Projects Track Record:** Showcases real enterprise case studies including **Vitafoam PLC, Red Star Express PLC, SIFAX Group, FMDQ OTC, and First E&P**.
+- **Humanized, Anti-Slop Copy:** Written strictly under the *Humanizer* and *GetPaid* frameworks—eliminating agency buzzwords ("seamless, cutting-edge, unparalleled") and replacing them with clear, conversion-driven business outcomes.
+- **Conversion Mechanisms:**
+  - **30-Minute Free Strategy Session:** High-intent lead capture routing straight to CKDigital's official WhatsApp (`0703 815 1723`) and email (`sales@ckdigital.net`).
+  - **The Ultimate Website Conversion Checklist:** Lead magnet capturing inbound prospects.
+  - **The 4-Second Test Audit Section:** Explaining to visitors exactly why typical websites fail to convert.
+- **Ultra-Fast & Mobile-Responsive:** Pure HTML5, CSS3, and vanilla JavaScript with zero framework bloat, optimized for Nigerian 3G/4G networks.
 
 ---
 
-## 💻 Local Preview
-Simply open `index.html` in your web browser, or run a local Python web server:
+## 🚀 Live Preview Locally
+Open `index.html` in any browser, or start a local server:
 ```bash
 python -m http.server 8080
 ```
@@ -30,56 +26,41 @@ Then visit: `http://localhost:8080`
 
 ## 🌐 Deploy to GitHub & GitHub Pages
 
-### 1. Initialize Git and Commit
+### 1. Commit Local Changes
 ```bash
 cd "C:\Users\user\OneDrive\Desktop\agency-website"
-git init
 git add .
-git commit -m "feat: complete Addepto SME automation landing page"
+git commit -m "feat: complete CKDIGITAL official humanized agency website"
 ```
 
 ### 2. Push to GitHub
-Create a new public or private repository on GitHub (e.g. `addepto-agency`), then run:
+Create a new repository on your GitHub account ([github.com/new](https://github.com/new)) named `ckdigital-website`, then run:
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/addepto-agency.git
+git remote add origin https://github.com/alukoisreal007-png/ckdigital-website.git
 git branch -M main
 git push -u origin main
 ```
 
-### 3. Turn on Free GitHub Pages
-1. Go to your repository **Settings** on GitHub.
-2. Navigate to **Pages** in the left sidebar.
-3. Under **Build and deployment > Branch**, select `main` and `/ (root)`.
-4. Click **Save**. Your website will be live in 60 seconds at `https://YOUR_USERNAME.github.io/addepto-agency/`.
+### 3. Activate Free GitHub Pages
+1. On GitHub, navigate to **Settings > Pages**.
+2. Set the Source branch to `main` and folder to `/ (root)`.
+3. Click **Save**. Your site will be live at `https://alukoisreal007-png.github.io/ckdigital-website/`.
 
 ---
 
 ## ☁️ Deploy to Google Cloud Console (Cloud Run)
 
-The included `Dockerfile` and `nginx.conf` are pre-configured for Google Cloud Run:
+The repository includes the production `Dockerfile` and `nginx.conf`:
 
 ```bash
-# 1. Authenticate with Google Cloud
+# 1. Login to Google Cloud
 gcloud auth login
 
-# 2. Set your Google Cloud project
-gcloud config set project YOUR_PROJECT_ID
-
-# 3. Deploy directly with Cloud Build & Cloud Run
-gcloud run deploy addepto-agency \
+# 2. Deploy directly to Cloud Run
+gcloud run deploy ckdigital-website \
   --source . \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated
 ```
-Cloud Run will automatically build the container and provide you with a live HTTPS URL (e.g. `https://addepto-agency-xyz.a.run.app`).
-
----
-
-## 🔥 Deploy to Firebase Hosting (Google Cloud)
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-firebase deploy
-```
+Cloud Run will automatically build the container and provide a live HTTPS URL.
