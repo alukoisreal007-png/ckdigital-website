@@ -237,7 +237,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
   letter-spacing: 0.01em;
 }
 
-/* INTERACTIVE HERO STAGE WITH LIVING ORB */
+/* INTERACTIVE HERO STAGE WITH LIVING EYEBALL ORB */
 .stage {
   position: relative;
   min-height: 560px;
@@ -253,52 +253,129 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
   50% { transform: translateY(10px); }
 }
 
+/* Eyeball Blink Animation */
+@keyframes eyeBlink {
+  0%, 93%, 97%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.06);
+  }
+}
+
+/* Autonomous Idle Micro-Glance for Pupil */
+@keyframes pupilIdleGlance {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(14px, -6px); }
+  45% { transform: translate(-12px, 5px); }
+  70% { transform: translate(10px, 8px); }
+  85% { transform: translate(-8px, -4px); }
+}
+
+/* THE ORB CORE (Spherical Eyeball Body) */
 .orb {
   position: absolute;
   left: 2%;
-  top: 90px;
+  top: 80px;
   width: min(94%, 450px);
-  aspect-ratio: 1.35;
-  border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%;
-  background: radial-gradient(circle at 35% 22%, #63845b, #192718 40%, #040804 80%);
-  box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.8), 0 35px 70px rgba(0, 0, 0, 0.6);
+  aspect-ratio: 1.25;
+  border-radius: 50% 50% 48% 48% / 56% 56% 44% 44%;
+  background: radial-gradient(circle at 35% 24%, #49663f 0%, #1c2b18 36%, #091206 72%, #020401 100%);
+  box-shadow: 
+    inset 0 -24px 50px rgba(0, 0, 0, 0.9), 
+    inset 0 12px 28px rgba(183, 211, 53, 0.22),
+    0 35px 70px rgba(0, 0, 0, 0.65),
+    0 0 50px rgba(183, 211, 53, 0.12);
   z-index: 0;
   animation: floatSlow 8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.orb::before {
-  content: "";
-  position: absolute;
-  left: 14%;
-  right: 14%;
-  top: 38%;
-  height: 24%;
-  border-radius: 999px;
-  background: #040704;
-  box-shadow: inset 0 0 0 2px #26381e, 0 0 20px rgba(183, 211, 53, 0.15);
+/* SCLERA: The dark contoured eye space on the orb */
+.sclera {
+  position: relative;
+  width: 76%;
+  height: 48%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(ellipse at 50% 50%, #0d170c 0%, #050a04 60%, #010301 100%);
+  box-shadow: 
+    inset 0 0 25px rgba(0, 0, 0, 0.98), 
+    inset 0 0 0 2px rgba(183, 211, 53, 0.28), 
+    0 0 24px rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-origin: center center;
+  animation: eyeBlink 6s ease-in-out infinite;
 }
 
-.orb::after {
-  content: "";
+/* Subtle orbital lid creases */
+.eyelid {
   position: absolute;
-  left: 6%;
-  right: 6%;
-  top: 66%;
-  border-bottom: 4px solid var(--lime);
+  pointer-events: none;
+  z-index: 2;
+}
+.eyelid-top {
+  top: 18%;
+  width: 80%;
+  height: 18px;
+  border-bottom: 2px solid rgba(183, 211, 53, 0.32);
   border-radius: 50%;
-  height: 8%;
-  box-shadow: 0 10px 30px var(--lime);
+  filter: drop-shadow(0 2px 6px rgba(183, 211, 53, 0.2));
+}
+.eyelid-bottom {
+  bottom: 18%;
+  width: 74%;
+  height: 16px;
+  border-top: 2px solid rgba(183, 211, 53, 0.22);
+  border-radius: 50%;
+  filter: drop-shadow(0 -2px 6px rgba(183, 211, 53, 0.15));
 }
 
-.eye {
-  position: absolute;
-  left: 62%;
-  top: 47%;
-  width: 12px;
-  height: 12px;
+/* PUPIL: The vibrant illuminated dot on the dark sclera */
+.pupil, .eye {
+  position: relative;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--lime-bright);
-  box-shadow: 0 0 16px var(--lime-bright);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--lime-bright) 24%, var(--lime) 60%, #466512 90%);
+  box-shadow: 
+    0 0 20px var(--lime-bright), 
+    0 0 45px var(--lime-glow),
+    inset 0 0 6px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: pupilIdleGlance 8s ease-in-out infinite;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.4, 1);
+  will-change: transform;
+}
+
+/* Inner deep void pupil core */
+.pupil-core {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #020401;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Specular corneal reflection catchlight */
+.glint {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  top: 18%;
+  left: 24%;
+  box-shadow: 0 0 4px #ffffff;
 }
 
 .fc {
@@ -756,6 +833,15 @@ form .btn {
     pointer-events: none;
   }
   
+  .pupil, .eye {
+    width: 36px;
+    height: 36px;
+  }
+  .pupil-core {
+    width: 13px;
+    height: 13px;
+  }
+  
   .fc {
     position: relative;
     width: 100% !important;
@@ -814,5 +900,5 @@ form .btn {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb, .fc1, .fc2 { animation: none; }
+  .orb, .fc1, .fc2, .sclera, .pupil { animation: none; }
 }

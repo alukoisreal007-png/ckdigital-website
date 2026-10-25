@@ -57,3 +57,55 @@ if (checkForm) {
     window.location.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
   });
 }
+
+// ============================================================
+// Interactive Eyeball Tracking (Dark Sclera & Illuminated Pupil)
+// ============================================================
+(function initEyeballTracking() {
+  var sclera = document.getElementById("sclera");
+  var pupil = document.getElementById("pupil");
+  var hero = document.querySelector(".hero");
+  if (!sclera || !pupil || !hero) return;
+
+  // Respect user preference for reduced motion
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (prefersReducedMotion && prefersReducedMotion.matches) return;
+
+  var isMouseOver = false;
+  var rafId = null;
+
+  hero.addEventListener("mousemove", function (e) {
+    if (!isMouseOver) {
+      isMouseOver = true;
+      pupil.style.animation = "none";
+    }
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function () {
+      var rect = sclera.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+
+      var dx = e.clientX - centerX;
+      var dy = e.clientY - centerY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var angle = Math.atan2(dy, dx);
+
+      // Travel boundaries within the dark sclera
+      var maxTravelX = (rect.width / 2) - 30;
+      var maxTravelY = (rect.height / 2) - 24;
+      var travelFactor = Math.min(dist / 380, 1);
+
+      var moveX = Math.cos(angle) * maxTravelX * travelFactor;
+      var moveY = Math.sin(angle) * maxTravelY * travelFactor;
+
+      pupil.style.transform = "translate(" + moveX.toFixed(1) + "px, " + moveY.toFixed(1) + "px)";
+    });
+  });
+
+  hero.addEventListener("mouseleave", function () {
+    isMouseOver = false;
+    pupil.style.transform = "translate(0px, 0px)";
+    pupil.style.animation = "pupilIdleGlance 8s ease-in-out infinite";
+  });
+})();
