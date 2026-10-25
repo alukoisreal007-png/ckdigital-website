@@ -419,6 +419,52 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
 }
 .row b { color: var(--olive); font-weight: 700; }
 
+/* ============================================================
+   PAGE LOAD: HERO TEXT RISE & ZOOM (EXCEPT THE ANCHORED ORB)
+   ============================================================ */
+@keyframes heroRiseZoom {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero-content > * {
+  animation: heroRiseZoom 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  will-change: opacity, transform;
+}
+.hero-content > *:nth-child(1) { animation-delay: 0.05s; } /* H1 Headline */
+.hero-content > *:nth-child(2) { animation-delay: 0.18s; } /* Subhead paragraph */
+.hero-content > *:nth-child(3) { animation-delay: 0.30s; } /* Strategy CTA buttons */
+.hero-content > *:nth-child(4) { animation-delay: 0.42s; } /* Trust statement */
+.hero-content > *:nth-child(5) { animation-delay: 0.52s; } /* Badge chips */
+
+/* ============================================================
+   SCROLL-DRIVEN VIEWPORT REVEALS (RISE & ZOOM INTO FOCUS)
+   ============================================================ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.97);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Fluid cascade timing for grid & list items */
+.bento-card:nth-child(1), .mag-row:nth-child(1), .leak-item:nth-child(1), .step:nth-child(1) { transition-delay: 0.06s; }
+.bento-card:nth-child(2), .mag-row:nth-child(2), .leak-item:nth-child(2), .step:nth-child(2) { transition-delay: 0.16s; }
+.bento-card:nth-child(3), .mag-row:nth-child(3), .leak-item:nth-child(3), .step:nth-child(3) { transition-delay: 0.26s; }
+.bento-card:nth-child(4), .mag-row:nth-child(4), .leak-item:nth-child(4) { transition-delay: 0.36s; }
+.bento-card:nth-child(5), .mag-row:nth-child(5), .leak-item:nth-child(5) { transition-delay: 0.44s; }
+
 /* REFINED CLIENT TRUST BAR */
 .trust-bar {
   background: #f4f6ee;
@@ -917,6 +963,16 @@ form .btn {
   .cta { margin-top: 72px; padding: 60px 22px; }
   form { grid-template-columns: 1fr; }
   
+  /* Tighter travel and faster snap on mobile for responsive thumb flicking */
+  .hero-content > * {
+    animation-duration: 0.65s;
+    transform: translate3d(0, 16px, 0) scale(0.98);
+  }
+  .reveal-on-scroll {
+    transform: translate3d(0, 16px, 0) scale(0.985);
+    transition-duration: 0.65s;
+  }
+
   /* STICKY BOTTOM WHATSAPP PILL FOR NIGERIAN MOBILE USERS */
   .mobile-whatsapp-btn {
     display: flex;
@@ -942,5 +998,10 @@ form .btn {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb, .fc1, .fc2, .sclera, .pupil { animation: none; }
+  .orb, .fc1, .fc2, .sclera, .pupil, .hero-content > *, .reveal-on-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

@@ -109,3 +109,44 @@ if (checkForm) {
     pupil.style.animation = "pupilIdleGlance 8s ease-in-out infinite";
   });
 })();
+
+// ============================================================
+// Scroll-Driven Rise & Zoom Viewport Reveals
+// ============================================================
+(function initScrollReveals() {
+  // If user prefers reduced motion, elements remain fully visible
+  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  var selector = ".trust-bar, .sec .lab, .sec h2, .lead, .leak-item, .bento-card, .mag-row, .step, .wide, details, .cta, .reveal-on-scroll";
+  var elements = document.querySelectorAll(selector);
+  if (!elements.length) return;
+
+  // Progressive enhancement: add reveal class dynamically
+  elements.forEach(function (el) {
+    el.classList.add("reveal-on-scroll");
+  });
+
+  // Graceful fallback for older browsers without IntersectionObserver
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(function (el) { el.classList.add("is-revealed"); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-revealed");
+        obs.unobserve(entry.target); // Lock in place once revealed
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: "0px 0px -8% 0px", // Fires as soon as 8% of the element enters view
+    threshold: 0.08
+  });
+
+  elements.forEach(function (el) {
+    observer.observe(el);
+  });
+})();
