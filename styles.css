@@ -813,12 +813,10 @@ form .btn {
   
   .stage {
     position: relative;
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 32px;
-    padding: 24px 0;
+    min-height: 440px;
+    margin-top: 24px;
+    display: block;
+    padding: 0;
   }
   
   .orb {
@@ -826,29 +824,73 @@ form .btn {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: min(92%, 360px);
+    width: min(84vw, 320px);
     aspect-ratio: 1.25;
-    opacity: 0.9;
+    opacity: 1;
     z-index: 0;
     pointer-events: none;
   }
   
   .pupil, .eye {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
   .pupil-core {
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
+  }
+  .glint {
+    width: 5px;
+    height: 5px;
   }
   
+  /* Compact Floating Cards on Mobile - Framed Around the Eyeball */
   .fc {
-    position: relative;
-    width: 100% !important;
+    position: absolute !important;
+    width: auto !important;
+    max-width: min(240px, 68vw);
+    padding: 10px 14px !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.7);
     z-index: 1;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  }
+  
+  .fc h3 {
+    font-size: 13px !important;
+    margin: 0 0 4px !important;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+  }
+  
+  .fc .row {
+    font-size: 12px !important;
+    padding: 4px 0 !important;
+    gap: 8px !important;
+  }
+  
+  .fc .row b {
+    font-size: 12px !important;
+  }
+
+  .fc1 {
+    top: 6px !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  
+  .fc2 {
+    bottom: 6px !important;
+    right: 0 !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .hide-mobile {
+    display: none !important;
   }
   
   .sec {
